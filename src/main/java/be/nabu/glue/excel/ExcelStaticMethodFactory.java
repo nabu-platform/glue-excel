@@ -13,6 +13,7 @@ public class ExcelStaticMethodFactory implements StaticMethodFactory {
 		classes.add(ExcelMethods.class);
 		classes.add(ExcelFunctions.class);
 		classes.add(MatrixMethods.class);
+		classes.add(ExcelMethodsV2.class);
 		return classes;
 	}
 	

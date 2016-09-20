@@ -1,5 +1,6 @@
 package be.nabu.glue.excel;
 
+import be.nabu.glue.annotations.GlueMethod;
 import be.nabu.glue.impl.methods.ScriptMethods;
 import be.nabu.libs.converter.ConverterFactory;
 import be.nabu.libs.converter.api.Converter;
@@ -8,6 +9,7 @@ import be.nabu.libs.evaluator.annotations.MethodProviderClass;
 @MethodProviderClass(namespace = "excel", caseSensitive = false)
 public class ExcelFunctions {
 	
+	@GlueMethod(version = 1)
 	public static Number SUM(Object...objects) {
 		if (objects == null) {
 			return null;
@@ -44,6 +46,7 @@ public class ExcelFunctions {
 		return object instanceof Double || object.getClass().equals(double.class) || object instanceof Float || object.getClass().equals(float.class) || (object instanceof String && ((String) object).contains("."));
 	}
 	
+	@GlueMethod(version = 1)
 	public static Number MAX(Object...objects) {
 		if (objects == null) {
 			return null;
@@ -70,6 +73,7 @@ public class ExcelFunctions {
 		return max;
 	}
 	
+	@GlueMethod(version = 1)
 	public static Object IF(Boolean useFirst, Object first, Object second) {
 		return useFirst != null && useFirst ? first : second;
 	}
