@@ -1,7 +1,7 @@
 package be.nabu.glue.excel;
 
 import be.nabu.glue.annotations.GlueMethod;
-import be.nabu.glue.impl.methods.ScriptMethods;
+import be.nabu.glue.core.impl.methods.ScriptMethods;
 import be.nabu.libs.converter.ConverterFactory;
 import be.nabu.libs.converter.api.Converter;
 import be.nabu.libs.evaluator.annotations.MethodProviderClass;

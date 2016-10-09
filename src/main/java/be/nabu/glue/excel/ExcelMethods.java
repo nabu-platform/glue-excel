@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import be.nabu.glue.annotations.GlueMethod;
-import be.nabu.glue.impl.methods.ScriptMethods;
+import be.nabu.glue.core.impl.methods.ScriptMethods;
 import be.nabu.libs.evaluator.annotations.MethodProviderClass;
 import be.nabu.utils.excel.ExcelParser;
 import be.nabu.utils.excel.FileType;
