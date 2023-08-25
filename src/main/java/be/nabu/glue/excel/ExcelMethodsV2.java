@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,29 @@ public class ExcelMethodsV2 {
 		);
 		target.flush();
 		return target.toByteArray();
+	}
+	
+	@GlueMethod(version = 2)
+	public static Map<String, List<List<Object>>> objectify(Object content, String...sheets) throws IOException, ParseException {
+		String fileType = "xlsx";
+		if (content instanceof String && ((String) content).endsWith(".xls")) {
+			fileType = "xls";
+		}
+		ExcelParser parser = new ExcelParser(new ByteArrayInputStream(ScriptMethods.bytes(content)), FileType.valueOf(fileType.toUpperCase()), null);
+		try {
+			Map<String, List<List<Object>>> matrix = new HashMap<String, List<List<Object>>>();
+			List<String> whitelist = sheets == null || sheets.length == 0 ? new ArrayList<String>() : Arrays.asList(sheets);
+			for (int i = 0; i < parser.getWorkbook().getNumberOfSheets(); i++) {
+				String sheetName = parser.getWorkbook().getSheetName(i);
+				if (whitelist.isEmpty() || whitelist.contains(sheetName)) {
+					matrix.put(sheetName, parser.matrix(parser.getWorkbook().getSheetAt(i)));
+				}
+			}
+			return matrix;
+		}
+		finally {
+			parser.close();
+		}
 	}
 	
 	@GlueMethod(version = 2)
