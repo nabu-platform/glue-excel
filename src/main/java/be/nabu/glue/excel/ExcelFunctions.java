@@ -79,7 +79,10 @@ public class ExcelFunctions {
 				useDecimal = true;
 				max = converter.convert(max, Double.class);
 			}
-			Number converted = converter.convert(object, useDecimal ? Double.class : Long.class);
+			// regression in java? it can no longer correctly compile this:
+			// Number converted = converter.convert(object, useDecimal ? Double.class : Long.class);
+			Class<? extends Number> clazz = useDecimal ? Double.class : Long.class;
+			Number converted = converter.convert(object, clazz);
 			if (converted == null) {
 				throw new IllegalArgumentException("Not a number: " + object);
 			}
